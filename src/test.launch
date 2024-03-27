@@ -1,0 +1,19 @@
+<launch>
+    <!-- <arg name="input_topic" default="/os_cloud_node/points" />     输入topic   原始 default="/velodyne_points"    OR /kitti/velo/pointcloud    -->
+    
+
+ 
+    <arg name="rviz" default="false"/>
+
+
+    <node pkg="calibration_rot_axis" type="calibration_rot_axis_node" name="calibration_rot_axis_node" output="screen" >
+        <!-- <param name="input_topic" value="$(arg input_topic)"/>   输入topic   原始 default="/velodyne_points"    -->
+ 
+    </node>
+        <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz"
+              args="-d $(find calibration_rot_axis)/rviz/calibration_rot_axis.rviz"/>
+    </group>
+
+launch-prefix="gdb -ex run --args" 
+</launch>
